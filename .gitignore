@@ -1,0 +1,41 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Backup files
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Directory for compiled objects
+__pycache__
+*.py[cod]
+
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# SQL files that might contain sensitive data (if we ever add real data)
+# but we are using sample data, so we can keep the .sql files.
+# However, if we were to add production data, we would ignore it.
+# For now, we leave the SQL files tracked.
+
+# Miscellaneous
+*.bak
+*.swp
