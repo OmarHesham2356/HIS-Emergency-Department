@@ -1,0 +1,218 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Ziad EER">
+    <mxGraphModel dx="1900" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Ziad Khaled - Staff Hierarchy &amp; Locations EER Diagram" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="20" width="760" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="note" value="Only Ziad's 6 entities are shown: Employee, Doctor, Nurse, Admin, Department, DepartmentLocation." style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="575" y="60" width="730" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Entities -->
+        <mxCell id="employee" value="EMPLOYEE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="540" y="140" width="160" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="doctor" value="DOCTOR" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="100" y="520" width="160" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="nurse" value="NURSE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="535" y="520" width="160" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="admin" value="ADMIN" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="940" y="520" width="160" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="department" value="DEPARTMENT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="330" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="location" value="DEPARTMENT_LOCATION" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;strokeWidth=2;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="760" width="230" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Specialization -->
+        <mxCell id="isa" value="d" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="590" y="290" width="55" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="isa_label" value="Employee specialization" style="text;html=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="650" y="304" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Relationships -->
+        <mxCell id="works_doc" value="WORKS_IN" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="420" width="105" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="works_nurse" value="WORKS_IN" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="540" width="105" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="chairs" value="CHAIRS" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="285" width="105" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="has_location" value="HAS_LOCATION" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1425" y="555" width="120" height="75" as="geometry"/>
+        </mxCell>
+
+        <!-- Employee attributes -->
+        <mxCell id="emp_id" value="&lt;u&gt;employeeId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="290" y="95" width="135" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_user" value="userId&lt;br&gt;(FK to Users)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="430" y="30" width="145" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_first" value="firstName" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="610" y="35" width="130" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_last" value="lastName" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="765" y="95" width="130" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_birth" value="birthDate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="790" y="185" width="130" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_sex" value="sex" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="675" y="250" width="105" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_ssn" value="&lt;b&gt;&lt;u&gt;ssn&lt;/u&gt;&lt;/b&gt;&lt;br&gt;(UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="470" y="250" width="135" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_hire" value="hireDate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="310" y="185" width="125" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="emp_job" value="jobTitle" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="125" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Doctor attributes -->
+        <mxCell id="doc_id" value="&lt;u&gt;doctorId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="10" y="650" width="125" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="doc_emp" value="employeeId&lt;br&gt;(FK, UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="150" y="650" width="145" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="doc_dept" value="departmentId&lt;br&gt;(FK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="310" y="650" width="140" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="doc_major" value="majorScientificArea" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="5" y="755" width="170" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="doc_degree" value="degree" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="760" width="115" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="doc_join" value="joinDate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="340" y="760" width="125" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Nurse attributes -->
+        <mxCell id="nurse_id" value="&lt;u&gt;nurseId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="475" y="650" width="125" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="nurse_emp" value="employeeId&lt;br&gt;(FK, UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="650" width="145" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="nurse_dept" value="departmentId&lt;br&gt;(FK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="500" y="740" width="140" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="nurse_join" value="joinDate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="665" y="742" width="125" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Admin attributes -->
+        <mxCell id="admin_id" value="&lt;u&gt;adminId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="880" y="650" width="125" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="admin_emp" value="employeeId&lt;br&gt;(FK, UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1025" y="650" width="145" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- Department attributes -->
+        <mxCell id="dept_id" value="&lt;u&gt;departmentId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="190" width="150" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="dept_name" value="&lt;b&gt;&lt;u&gt;name&lt;/u&gt;&lt;/b&gt;&lt;br&gt;(UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="165" width="130" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="dept_code" value="&lt;b&gt;&lt;u&gt;code&lt;/u&gt;&lt;/b&gt;&lt;br&gt;(UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1600" y="190" width="130" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="dept_chair" value="chairmanDoctorId&lt;br&gt;(FK, UNIQUE)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1605" y="425" width="165" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dept_start" value="supervisionStartDate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1265" y="425" width="170" height="62" as="geometry"/>
+        </mxCell>
+
+        <!-- DepartmentLocation attributes -->
+        <mxCell id="loc_id" value="&lt;u&gt;locationId&lt;/u&gt;&lt;br&gt;(PK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="895" width="135" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="loc_dept" value="departmentId&lt;br&gt;(FK)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="920" width="140" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="loc_address" value="address" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1515" y="920" width="125" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="loc_lat" value="latitude" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="1010" width="125" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="loc_long" value="longitude" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;strokeWidth=1.5;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="1010" width="130" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Entity-attribute edges -->
+        <mxCell id="e_emp_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_user" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_user"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_first" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_first"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_last" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_last"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_birth" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_birth"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_sex" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_sex"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_ssn" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_ssn"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_hire" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_hire"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_emp_job" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="employee" target="emp_job"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_doc_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_emp" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_emp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_dept" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_dept"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_major" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_major"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_degree" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_degree"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_join" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="doctor" target="doc_join"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_nurse_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="nurse" target="nurse_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_nurse_emp" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="nurse" target="nurse_emp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_nurse_dept" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="nurse" target="nurse_dept"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_nurse_join" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="nurse" target="nurse_join"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_admin_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="admin" target="admin_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_admin_emp" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="admin" target="admin_emp"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_dept_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="department" target="dept_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dept_name" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="department" target="dept_name"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dept_code" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="department" target="dept_code"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dept_chair" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="department" target="dept_chair"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dept_start" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="department" target="dept_start"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_loc_id" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="location" target="loc_id"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_loc_dept" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="location" target="loc_dept"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_loc_address" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="location" target="loc_address"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_loc_lat" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="location" target="loc_lat"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_loc_long" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="location" target="loc_long"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Structural and relationship edges -->
+        <mxCell id="e_emp_isa" value="Employee_Type" style="endArrow=none;html=1;rounded=0;fontSize=12;shape=link;width=3;" edge="1" parent="1" source="employee" target="isa"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_isa_doc" value="Doctor" style="endArrow=none;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="isa" target="doctor"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_isa_nurse" value="Nurse" style="endArrow=none;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="isa" target="nurse"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_isa_admin" value="Admin" style="endArrow=none;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="isa" target="admin"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_doc_works" value="N" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;shape=link;width=3;" edge="1" parent="1" source="doctor" target="works_doc"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_works_dept_doc" value="1" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;" edge="1" parent="1" source="works_doc" target="department"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_nurse_works" value="N" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;shape=link;width=3;" edge="1" parent="1" source="nurse" target="works_nurse"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_works_dept_nurse" value="1" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;" edge="1" parent="1" source="works_nurse" target="department"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_doc_chairs" value="1" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;strokeColor=#b85450;" edge="1" parent="1" source="doctor" target="chairs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_chairs_dept" value="1" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;strokeColor=#b85450;shape=link;width=3;" edge="1" parent="1" source="chairs" target="department"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dept_has_loc" value="1" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;shape=link;width=3;" edge="1" parent="1" source="department" target="has_location"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_has_loc_loc" value="N" style="endArrow=none;html=1;rounded=0;fontStyle=1;fontSize=13;" edge="1" parent="1" source="has_location" target="location"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
