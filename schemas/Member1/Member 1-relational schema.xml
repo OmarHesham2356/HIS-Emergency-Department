@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1800" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="2200" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: Users
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_users" value="USERS" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="60" width="80" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping Users attributes -->
+    <mxCell id="rect_users" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="82" width="560" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- Each column = one cell in a horizontal row -->
+    <mxCell id="u_userid" value="&lt;u&gt;UserID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="82" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="u_username" value="&lt;u&gt;Username&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="120" y="82" width="100" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="u_passhash" value="PasswordHash" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="220" y="82" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="u_email" value="&lt;u&gt;Email&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="340" y="82" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="u_role" value="Role" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="420" y="82" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="u_createdat" value="CreatedAt" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="500" y="82" width="90" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: Patient
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_patient" value="PATIENT" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="170" width="100" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping Patient attributes -->
+    <mxCell id="rect_patient" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="192" width="1250" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="p_patientid" value="&lt;u&gt;PatientID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="192" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_userid" value="&lt;u&gt;UserID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="130" y="192" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_ssn" value="&lt;u&gt;SSN&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="210" y="192" width="70" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_patnum" value="&lt;u&gt;PatientNumber&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="280" y="192" width="130" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_fname" value="FirstName" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="410" y="192" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_lname" value="LastName" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="500" y="192" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_address" value="Address" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="590" y="192" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_phone" value="Phone" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="670" y="192" width="70" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_bdate" value="BirthDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="740" y="192" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_sex" value="Sex" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="820" y="192" width="55" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_medhist" value="MedicalHistory" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="875" y="192" width="110" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_bp" value="BloodPressure" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="985" y="192" width="110" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_hr" value="HeartRate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1095" y="192" width="85" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="p_temp" value="Temperature" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="1180" y="192" width="100" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: EmergencyVisit
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_ev" value="EMERGENCY_VISIT" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="280" width="200" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping EmergencyVisit attributes -->
+    <mxCell id="rect_ev" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="302" width="735" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ev_visitid" value="&lt;u&gt;VisitID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="302" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_patientid" value="&lt;u&gt;PatientID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="120" y="302" width="95" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_triageid" value="&lt;u&gt;TriageID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="215" y="302" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_bedid" value="BedID" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="305" y="302" width="70" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_admdt" value="AdmissionDateTime" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="375" y="302" width="145" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_disdt" value="DischargeDateTime" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="520" y="302" width="145" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_disp" value="Disposition" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="665" y="302" width="100" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: Bed
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_bed" value="BED" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="390" width="60" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping Bed attributes -->
+    <mxCell id="rect_bed" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="412" width="455" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="bed_bedid" value="&lt;u&gt;BedID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="412" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="bed_roomnum" value="RoomNumber" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="120" y="412" width="105" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="bed_locid" value="&lt;u&gt;LocationID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="225" y="412" width="110" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="bed_bedtype" value="BedType" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="335" y="412" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="bed_status" value="Status" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="415" y="412" width="70" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: Appointment
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_appt" value="APPOINTMENT" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="500" width="150" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping Appointment attributes -->
+    <mxCell id="rect_appt" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="522" width="695" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="appt_id" value="&lt;u&gt;AppointmentID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="522" width="140" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_pid" value="&lt;u&gt;PatientID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="180" y="522" width="95" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_did" value="&lt;u&gt;DoctorID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="275" y="522" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_dt" value="AppointmentDateTime" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="365" y="522" width="160" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_status" value="Status" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="525" y="522" width="70" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_type" value="Type" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="595" y="522" width="60" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="appt_notes" value="Notes" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="655" y="522" width="70" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         TABLE: Payment
+    ═══════════════════════════════════════════ -->
+    <mxCell id="lbl_pay" value="PAYMENT" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="40" y="610" width="100" height="20" as="geometry" />
+    </mxCell>
+    
+    <!-- Horizontal rectangle grouping Payment attributes -->
+    <mxCell id="rect_pay" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="35" y="632" width="620" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="pay_pid" value="&lt;u&gt;PaymentID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="632" width="100" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pay_apptid" value="&lt;u&gt;AppointmentID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="140" y="632" width="140" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pay_amount" value="Amount" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="280" y="632" width="80" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pay_date" value="PaymentDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="360" y="632" width="105" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pay_method" value="PaymentMethod" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="465" y="632" width="115" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pay_status" value="Status" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="580" y="632" width="70" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         FK ARROWS — filled black arrowhead style
+         matching the lab image exactly:
+         arrow points INTO the referenced PK column
+    ═══════════════════════════════════════════ -->
+
+    <!-- Patient.UserID  →  Users.UserID  (1:1) -->
+    <mxCell id="arr_pat_users" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="p_userid" target="u_userid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="170" y="155" />
+          <mxPoint x="80" y="155" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- EmergencyVisit.PatientID  →  Patient.PatientID  (N:1) -->
+    <mxCell id="arr_ev_pat" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="ev_patientid" target="p_patientid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="167" y="265" />
+          <mxPoint x="85" y="265" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- EmergencyVisit.TriageID  →  Triage.TriageID  (cross-team note) -->
+    <mxCell id="arr_ev_triage" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="ev_triageid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="260" y="252" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="260" y="265" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_triage_note" value="→ Triage (Youssef)" style="text;html=1;fontSize=10;fontStyle=2;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="220" y="240" width="140" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- EmergencyVisit.BedID  →  Bed.BedID  (N:1 optional) -->
+    <mxCell id="arr_ev_bed" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="ev_bedid" target="bed_bedid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="340" y="370" />
+          <mxPoint x="80" y="370" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Bed.LocationID  →  DepartmentLocation (Ziad cross-team) -->
+    <mxCell id="arr_bed_loc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="bed_locid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="280" y="460" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_loc_note" value="→ DepartmentLocation (Ziad)" style="text;html=1;fontSize=10;fontStyle=2;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="200" y="448" width="200" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Appointment.PatientID  →  Patient.PatientID  (N:1) -->
+    <mxCell id="arr_appt_pat" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="appt_pid" target="p_patientid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="228" y="480" />
+          <mxPoint x="1380" y="480" />
+          <mxPoint x="1380" y="207" />
+          <mxPoint x="1280" y="207" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Appointment.DoctorID  →  Doctor (Ziad cross-team) -->
+    <mxCell id="arr_appt_doc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="appt_did" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="320" y="490" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="320" y="500" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="lbl_doc_note" value="→ Doctor (Ziad)" style="text;html=1;fontSize=10;fontStyle=2;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="280" y="488" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Payment.AppointmentID  →  Appointment.AppointmentID  (1:1) -->
+    <mxCell id="arr_pay_appt" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=#000000;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="pay_apptid" target="appt_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="210" y="590" />
+          <mxPoint x="110" y="590" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
