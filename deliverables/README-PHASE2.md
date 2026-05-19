@@ -15,7 +15,7 @@
 3. [Member 1 — Omar Hesham](#member-1--omar-hesham-team-leader)
    - Users · Patient · EmergencyVisit · Bed · Appointment · Payment
 4. [Member 2 — Ziad Khaled](#member-2--ziad-khaled)
-   - Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+   - Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 5. [Member 3 — Youssef Amir](#member-3--youssef-amir)
    - Triage · Examination · Prescription · PrescriptionDetail · Medication · Document
 6. [Cross-Table Relationship Mapping](#cross-table-relationship-mapping)
@@ -344,11 +344,50 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 # Member 2 — Ziad Khaled
 ## Focus: Staff Hierarchy & Location Tables
-### Your 6 Tables: Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+### Your 7 Tables: Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 
 ---
 
-### Table 1 of 6: Employee (Superclass)
+### Table 1 of 7: Hospital
+
+**ERD Entity → Relational Table**
+
+| Column Name | Data Type | Constraints | Notes |
+|-------------|-----------|-------------|-------|
+| `HospitalID` | INT | **PRIMARY KEY, AUTO_INCREMENT** | Surrogate key |
+| `Name` | VARCHAR(100) | **UNIQUE, NOT NULL** | Hospital name |
+| `Address` | TEXT | — | Physical address |
+| `Phone` | VARCHAR(20) | — | Contact number |
+| `Email` | VARCHAR(100) | **UNIQUE** | Admin email |
+| `EstablishedYear` | INT | — | Year founded |
+
+**Relationships Mapped:**
+| Relationship | Mapping | Where FK Lives |
+|-------------|---------|----------------|
+| 1:N with Department | FK in Department | `Department.HospitalID` → `Hospital.HospitalID` |
+
+**Normalization Notes:**
+- ✅ 1NF: All atomic
+- ✅ 2NF: Single-column PK, no partial dependencies
+- ✅ 3NF: No transitive dependencies
+- ⚠️ This is the **root entity** of the entire schema — no FK dependencies. Create it first.
+
+**What to write in `relational-schema.md`:**
+```markdown
+### Table: Hospital
+| Column | Type | Constraints |
+|--------|------|-------------|
+| HospitalID | INT | PK, AUTO_INCREMENT |
+| Name | VARCHAR(100) | UNIQUE, NOT NULL |
+| Address | TEXT | |
+| Phone | VARCHAR(20) | |
+| Email | VARCHAR(100) | UNIQUE |
+| EstablishedYear | INT | |
+```
+
+---
+
+### Table 2 of 7: Employee (Superclass)
 
 **ERD Entity → Relational Table**
 
@@ -396,7 +435,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 2 of 6: Doctor
+### Table 3 of 7: Doctor
 
 **ERD Entity → Relational Table**
 
@@ -439,7 +478,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 3 of 6: Nurse
+### Table 4 of 7: Nurse
 
 **ERD Entity → Relational Table**
 
@@ -474,7 +513,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 4 of 6: Admin
+### Table 5 of 7: Admin
 
 **ERD Entity → Relational Table**
 
@@ -503,13 +542,14 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 5 of 6: Department
+### Table 6 of 7: Department
 
 **ERD Entity → Relational Table**
 
 | Column Name | Data Type | Constraints | Notes |
 |-------------|-----------|-------------|-------|
 | `DepartmentID` | INT | **PRIMARY KEY, AUTO_INCREMENT** | Surrogate key |
+| `HospitalID` | INT | **FOREIGN KEY → Hospital(HospitalID), NOT NULL** | Which hospital |
 | `Name` | VARCHAR(100) | **UNIQUE, NOT NULL** | 🔴 PDF unique attribute |
 | `Code` | VARCHAR(20) | **UNIQUE, NOT NULL** | 🔴 PDF unique attribute |
 | `ChairmanDoctorID` | INT | **FOREIGN KEY → Doctor(DoctorID), UNIQUE** | Who chairs the dept |
@@ -518,6 +558,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 **Relationships Mapped:**
 | Relationship | Mapping | Where FK Lives |
 |-------------|---------|----------------|
+| N:1 with Hospital | FK here | `Department.HospitalID` → `Hospital.HospitalID` |
 | 1:N with Doctor | FK in Doctor | `Doctor.DepartmentID` → `Department.DepartmentID` |
 | 1:N with Nurse | FK in Nurse | `Nurse.DepartmentID` → `Department.DepartmentID` |
 | 1:1 Chairman with Doctor | FK here | `Department.ChairmanDoctorID` → `Doctor.DoctorID` (UNIQUE) |
@@ -536,6 +577,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 | Column | Type | Constraints |
 |--------|------|-------------|
 | DepartmentID | INT | PK, AUTO_INCREMENT |
+| HospitalID | INT | FK → Hospital(HospitalID), NOT NULL |
 | Name | VARCHAR(100) | UNIQUE, NOT NULL |
 | Code | VARCHAR(20) | UNIQUE, NOT NULL |
 | ChairmanDoctorID | INT | FK → Doctor(DoctorID), UNIQUE |
@@ -544,7 +586,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 6 of 6: DepartmentLocation
+### Table 7 of 7: DepartmentLocation
 
 **ERD Entity → Relational Table**
 
@@ -582,6 +624,15 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ### ✅ Ziad's Step-by-Step Work Order
 
+```
+1. Hospital (independent — start here, no dependencies)
+2. Employee (depends on Omar's Users — coordinate first)
+3. Department (depends on Hospital — place after it)
+4. Doctor (depends on Employee and Department)
+   → Then add: ALTER TABLE Department ADD CONSTRAINT fk_dept_chairman ...
+5. Nurse (depends on Employee and Department)
+6. Admin (depends on Employee)
+7. DepartmentLocation (depends on Department)
 ```
 1. Employee (depends on Omar's Users — coordinate first)
 2. Department (independent of others — can start anytime)
@@ -866,7 +917,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ## Cross-Table Relationship Mapping
 
-This section shows how all relationships between the 18 tables are implemented via foreign keys.
+This section shows how all relationships between the 19 tables are implemented via foreign keys.
 
 ### 1:1 Relationships
 
@@ -885,6 +936,7 @@ This section shows how all relationships between the 18 tables are implemented v
 
 | Table 1 (1-side) | Table N (N-side) | FK Column | Where FK Lives |
 |------------------|------------------|-----------|----------------|
+| Hospital | Department | HospitalID | Department.HospitalID |
 | Patient | Triage | PatientID | Triage.PatientID |
 | Patient | EmergencyVisit | PatientID | EmergencyVisit.PatientID |
 | Patient | Examination | PatientID | Examination.PatientID |
@@ -931,6 +983,7 @@ Each member must verify their tables pass 3NF. Here's the checklist:
 
 | Table | 1NF | 2NF | 3NF | Notes |
 |-------|-----|-----|-----|-------|
+| Hospital | ✅ | ✅ | ✅ | Root entity, clean |
 | Users | ✅ | ✅ | ✅ | Clean |
 | Patient | ✅ | ✅ | ✅ | Vitals are current snapshot; historical in Triage |
 | Employee | ✅ | ✅ | ✅ | Superclass — clean |

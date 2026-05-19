@@ -15,7 +15,7 @@
 3. [Member 1 — Omar Hesham](#member-1--omar-hesham-team-leader)
    - Users · Patient · EmergencyVisit · Bed · Appointment · Payment
 4. [Member 2 — Ziad Khaled](#member-2--ziad-khaled)
-   - Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+   - Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 5. [Member 3 — Youssef Amir](#member-3--youssef-amir)
    - Triage · Examination · Prescription · PrescriptionDetail · Medication · Document
 6. [Dependency Map (Who to Coordinate With)](#dependency-map)
@@ -314,11 +314,45 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 # Member 2 — Ziad Khaled
 ## Focus: Staff Hierarchy & Locations
-### Your 6 Entities: Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+### Your 7 Entities: Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 
 ---
 
-### Entity 1 of 6: Employee (Superclass)
+### Entity 1 of 7: Hospital
+
+**What it represents:** The parent organization that contains multiple departments. This satisfies the explicit project requirement: *"Model hospitals including regular rooms, . etc"* and *"Model work relationship between doctor and hospital"*. Every department belongs to exactly one hospital.
+
+**Attributes:**
+
+| Attribute | Data Type | Constraints | ERD Notation |
+|-----------|-----------|-------------|--------------|
+| HospitalID | INT | **PRIMARY KEY** | <u>HospitalID</u> |
+| Name | VARCHAR(100) | **UNIQUE, NOT NULL** | **<u>Name</u>** |
+| Address | TEXT | — | Physical address |
+| Phone | VARCHAR(20) | — | Contact number |
+| Email | VARCHAR(100) | **UNIQUE** | Admin email |
+| EstablishedYear | INT | — | Year founded |
+
+**Relationships:**
+
+| Relationship | With Entity | Cardinality | How to Draw |
+|-------------|-------------|-------------|-------------|
+| Contains | Department | 1:N | Line from Hospital `1` to Department `N`. Label `◊ Contains`. |
+
+**Drawing instructions:**
+- Hospital is a **strong, independent entity** — no FK dependencies.
+- Draw it at the top of your hierarchy since it's the highest-level entity.
+- The 1:N relationship to Department means: one hospital has many departments, but each department belongs to exactly one hospital.
+- Add a note: *"Hospital is the parent organization"*.
+
+**📌 Dependencies:**
+- None! Hospital is completely independent.
+- ⚠️ **Draw this FIRST** — it's the root of the entire schema.
+- Department needs HospitalID from you.
+
+---
+
+### Entity 2 of 7: Employee (Superclass)
 
 **What it represents:** The **superclass** for all hospital staff — doctors, nurses, and administrators. Every employee has a User account for login. This uses the **ER specialization** pattern: Employee is the parent/general entity, and Doctor/Nurse/Admin are child/specific entities that inherit from it.
 
@@ -367,7 +401,7 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 ---
 
-### Entity 2 of 6: Doctor
+### Entity 3 of 7: Doctor
 
 **What it represents:** A doctor who works in the Emergency Department. Each doctor is a specialization of Employee (IS-A relationship).
 
@@ -407,7 +441,7 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 ---
 
-### Entity 3 of 6: Nurse
+### Entity 4 of 7: Nurse
 
 **What it represents:** A nurse who works in the Emergency Department, primarily responsible for performing triage assessments.
 
@@ -440,7 +474,7 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 ---
 
-### Entity 4 of 6: Admin
+### Entity 5 of 7: Admin
 
 **What it represents:** An administrative staff member who manages the system (e.g., handles reports, manages users, accesses the admin dashboard).
 
@@ -467,15 +501,16 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 ---
 
-### Entity 5 of 6: Department
+### Entity 6 of 7: Department
 
-**What it represents:** The Emergency Department itself — its identity, code, and who chairs it. Note: this system could have multiple departments, but we are focusing on the Emergency Department.
+**What it represents:** The Emergency Department itself — its identity, code, and who chairs it. Note: this system could have multiple departments, but we are focusing on the Emergency Department. Each department belongs to exactly one hospital.
 
 **Attributes:**
 
 | Attribute | Data Type | Constraints | ERD Notation |
 |-----------|-----------|-------------|--------------|
 | DepartmentID | INT | **PRIMARY KEY** | <u>DepartmentID</u> |
+| HospitalID | INT | **FOREIGN KEY → Hospital(HospitalID), NOT NULL** | HospitalID (FK) → Hospital |
 | Name | VARCHAR(100) | **UNIQUE, NOT NULL** | **<u>Name</u>** 🔴 |
 | Code | VARCHAR(20) | **UNIQUE, NOT NULL** | **<u>Code</u>** 🔴 |
 | ChairmanDoctorID | INT | **FOREIGN KEY → Doctor(DoctorID), UNIQUE** | ChairmanDoctorID (FK) → Doctor |
@@ -487,6 +522,7 @@ Day 2 (Tue):  Payment (once Appointment is done)
 
 | Relationship | With Entity | Cardinality | How to Draw |
 |-------------|-------------|-------------|-------------|
+| Belongs to | Hospital | N:1 | Line from Department N to Hospital 1. Thick line on Department side (every dept belongs to a hospital). |
 | Has Doctor | Doctor | 1:N | Line from Department `1` to Doctor `N`. |
 | Has Nurse | Nurse | 1:N | Line from Department `1` to Nurse `N`. |
 | Chaired by | Doctor | 1:1 | Line from Department `1` to Doctor `1` (Chairman). |
@@ -498,13 +534,14 @@ Day 2 (Tue):  Payment (once Appointment is done)
 - ⚠️ **Circular dependency:** Department.ChairmanDoctorID references Doctor.DoctorID. Solution: define Department first **without** the chairman, define Doctor (which references Department.DepartmentID), then go back and add the ChairmanDoctorID relationship line.
 
 **📌 Dependencies:**
+- Needs **HospitalID** from you (Hospital — define Hospital first, it's independent).
 - Needs **DoctorID** for ChairmanDoctorID (circular — resolve after Doctor is created).
 - Omar needs DepartmentID for nothing directly, but your DepartmentLocation feeds into Omar's Bed.
 - Youssef doesn't directly need Department.
 
 ---
 
-### Entity 6 of 6: DepartmentLocation
+### Entity 7 of 7: DepartmentLocation
 
 **What it represents:** A physical location where the department operates. A department can have multiple locations (e.g., main ER building, satellite urgent care). This also stores **geo-coordinates** for the "find nearest place" requirement.
 
@@ -539,7 +576,8 @@ Day 2 (Tue):  Payment (once Appointment is done)
 ### ✅ Ziad's Step-by-Step Work Order
 
 ```
-Day 1 (Mon):  Employee (after Omar gives you UserID) → Department (first draft without chairman)
+Day 1 (Mon):  Hospital (independent — draw FIRST) → Employee (after Omar gives you UserID)
+Day 1 (Mon):  Department (first draft without chairman, with HospitalID FK)
 Day 1 (Mon):  Doctor → Nurse → Admin (all subclass entities)
 Day 1 (Mon):  DepartmentLocation (after Department is done)
 Day 1 (Mon):  Go back to Department and add ChairmanDoctorID relationship line
@@ -808,18 +846,22 @@ This shows who depends on whom and in what order:
           │          Ziad's    │            │                        │
           │          Entities  │            │                        │
           │     ┌──────────┐   │       ┌────┴────┐                   │
-          │     │ Employee │<──┘       │Departm't│                   │
-          │     └────┬─────┘          │Location │                   │
-          │          │                └────┬─────┘                   │
-          │     ┌────┴────┐               │                         │
-          │     │ ISA ▷   │               │  (Bed needs LocationID)  │
-          │  ┌──┴──┐ ┌───┴───┐ ┌─────┐   │                         │
-          │  │Doctor│ │ Nurse │ │Admin│   │                         │
-          │  └──┬───┘ └───┬───┘ └─────┘   │                         │
-          │     │         │               │                         │
-          └─────┼─────────┼───────────────┘                         │
-                │         │                                         │
-          ┌─────┼─────────┼─────────────────────────────────────────┘
+          │     │ Hospital │   │       │Departm't│                   │
+          │     └────┬─────┘   │       │Location │                   │
+          │          │         │       └────┬─────┘                   │
+          │     ┌────┴─────┐   │            │                         │
+          │     │ Employee │<──┘            │  (Bed needs LocationID)  │
+          │     └────┬─────┘                │                         │
+          │          │                      │                         │
+          │     ┌────┴────┐                 │                         │
+          │     │ ISA ▷   │                 │                         │
+          │  ┌──┴──┐ ┌───┴───┐ ┌─────┐     │                         │
+          │  │Doctor│ │ Nurse │ │Admin│     │                         │
+          │  └──┬───┘ └───┬───┘ └─────┘     │                         │
+          │     │         │                 │                         │
+          └─────┼─────────┼─────────────────┘                         │
+                │         │                                           │
+          ┌─────┼─────────┼───────────────────────────────────────────┘
           │     │         │           Youssef's Entities
           │     │    ┌────┴────┐  ┌──────────────┐
           │     │    │ Triage  │  │  Examination  │
@@ -844,6 +886,7 @@ This shows who depends on whom and in what order:
 
 | What | Who Gives | Who Needs | When |
 |------|-----------|-----------|------|
+| HospitalID | Ziad (Hospital) | Ziad (Department) | Mon AM |
 | UserID | Omar (Users) | Ziad (Employee) | Mon AM |
 | PatientID | Omar (Patient) | Youssef (Triage, etc.) | Mon |
 | NurseID | Ziad (Nurse) | Youssef (Triage) | Mon |

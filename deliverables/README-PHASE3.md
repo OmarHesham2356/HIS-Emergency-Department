@@ -16,7 +16,7 @@
 4. [Member 1 — Omar Hesham](#member-1--omar-hesham-team-leader)
    - Users · Patient · EmergencyVisit · Bed · Appointment · Payment
 5. [Member 2 — Ziad Khaled](#member-2--ziad-khaled)
-   - Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+   - Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 6. [Member 3 — Youssef Amir](#member-3--youssef-amir)
    - Triage · Examination · Prescription · PrescriptionDetail · Medication · Document
 7. [Sample Data (INSERT Statements)](#sample-data-insert-statements)
@@ -353,11 +353,48 @@ INSERT INTO Payment (AppointmentID, Amount, PaymentDate, PaymentMethod, Status) 
 
 # Member 2 — Ziad Khaled
 ## Focus: Staff Hierarchy & Location Tables
-### Your 6 Tables: Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
+### Your 7 Tables: Hospital · Employee · Doctor · Nurse · Admin · Department · DepartmentLocation
 
 ---
 
-### Table 1 of 6: Employee (Superclass)
+### Table 1 of 7: Hospital
+
+**Rules:**
+- This is the **root table** — no FK dependencies. Create it first.
+- `Name` and `Email` must be UNIQUE.
+
+**Full SQL:**
+```sql
+CREATE TABLE Hospital (
+    HospitalID INT AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL,
+    Address TEXT,
+    Phone VARCHAR(20),
+    Email VARCHAR(100),
+    EstablishedYear INT,
+    PRIMARY KEY (HospitalID),
+    UNIQUE KEY uk_hospital_name (Name),
+    UNIQUE KEY uk_hospital_email (Email)
+);
+```
+
+**Sample INSERT Data (2 rows):**
+```sql
+INSERT INTO Hospital (Name, Address, Phone, Email, EstablishedYear) VALUES
+('Cairo General Hospital', '123 Health St, Cairo, Egypt', '02-12345678', 'info@cairogeneral.eg', 1985),
+('Nile Medical Center', '456 River Rd, Giza, Egypt', '02-87654321', 'contact@nilemed.eg', 2005);
+```
+
+**What to add to `his-emergency.sql`:**
+- The CREATE TABLE statement above
+- The INSERT statements above
+- Add a comment header: `-- ============================================\n-- Table: Hospital (Ziad)\n-- ============================================`
+
+✅ **This is the first table you should create** — no dependencies at all.
+
+---
+
+### Table 2 of 7: Employee (Superclass)
 
 **Rules:**
 - `UserID` is a **UNIQUE FK** to Users (Omar's table)
@@ -401,10 +438,11 @@ INSERT INTO Employee (UserID, FirstName, LastName, BirthDate, Sex, SSN, HireDate
 
 ---
 
-### Table 2 of 6: Department
+### Table 3 of 7: Department
 
 **Rules:**
 - `Name` and `Code` must be UNIQUE (PDF requirement)
+- `HospitalID` is FK to Hospital (Ziad's table)
 - `ChairmanDoctorID` is FK to Doctor — but Doctor doesn't exist yet!
 - **Solution:** Create Department **without** the ChairmanDoctorID FK constraint first, then add it later with ALTER TABLE
 
@@ -412,13 +450,15 @@ INSERT INTO Employee (UserID, FirstName, LastName, BirthDate, Sex, SSN, HireDate
 ```sql
 CREATE TABLE Department (
     DepartmentID INT AUTO_INCREMENT,
+    HospitalID INT NOT NULL,
     Name VARCHAR(100) NOT NULL,
     Code VARCHAR(20) NOT NULL,
     ChairmanDoctorID INT,
     SupervisionStartDate DATE,
     PRIMARY KEY (DepartmentID),
     UNIQUE KEY uk_dept_name (Name),
-    UNIQUE KEY uk_dept_code (Code)
+    UNIQUE KEY uk_dept_code (Code),
+    CONSTRAINT fk_dept_hospital FOREIGN KEY (HospitalID) REFERENCES Hospital(HospitalID)
 );
 ```
 
@@ -431,9 +471,9 @@ ALTER TABLE Department
 
 **Sample INSERT Data (2 rows):**
 ```sql
-INSERT INTO Department (Name, Code, SupervisionStartDate) VALUES
-('Emergency Department', 'ED001', '2020-01-15'),
-('Cardiology Unit', 'CARD001', '2021-06-01');
+INSERT INTO Department (HospitalID, Name, Code, SupervisionStartDate) VALUES
+(1, 'Emergency Department', 'ED001', '2020-01-15'),
+(2, 'Cardiology Unit', 'CARD001', '2021-06-01');
 ```
 
 **What to add to `his-emergency.sql`:**
@@ -444,7 +484,7 @@ INSERT INTO Department (Name, Code, SupervisionStartDate) VALUES
 
 ---
 
-### Table 3 of 6: Doctor
+### Table 4 of 7: Doctor
 
 **Rules:**
 - `EmployeeID` is a **UNIQUE FK** to Employee (ISA inheritance)
@@ -483,7 +523,7 @@ INSERT INTO Doctor (EmployeeID, DepartmentID, MajorScientificArea, Degree, JoinD
 
 ---
 
-### Table 4 of 6: Nurse
+### Table 5 of 7: Nurse
 
 **Rules:**
 - `EmployeeID` is a **UNIQUE FK** to Employee (ISA inheritance)
@@ -518,7 +558,7 @@ INSERT INTO Nurse (EmployeeID, DepartmentID, JoinDate) VALUES
 
 ---
 
-### Table 5 of 6: Admin
+### Table 6 of 7: Admin
 
 **Rules:**
 - `EmployeeID` is a **UNIQUE FK** to Employee (ISA inheritance)
@@ -548,7 +588,7 @@ INSERT INTO Admin (EmployeeID) VALUES
 
 ---
 
-### Table 6 of 6: DepartmentLocation
+### Table 7 of 7: DepartmentLocation
 
 **Rules:**
 - `DepartmentID` is FK to Department
@@ -584,13 +624,14 @@ INSERT INTO DepartmentLocation (DepartmentID, Address, Latitude, Longitude) VALU
 ### ✅ Ziad's SQL Work Order (execution order in file)
 
 ```
-1. Employee (depends on Omar's Users — place after Users)
-2. Department (Part 1: CREATE without ChairmanDoctorID FK)
-3. Doctor (depends on Employee and Department)
+1. Hospital (no dependencies — create first)
+2. Employee (depends on Omar's Users — place after Users)
+3. Department (depends on Hospital — place after it)
+4. Doctor (depends on Employee and Department)
    → Then add: ALTER TABLE Department ADD CONSTRAINT fk_dept_chairman ...
-4. Nurse (depends on Employee and Department)
-5. Admin (depends on Employee)
-6. DepartmentLocation (depends on Department)
+5. Nurse (depends on Employee and Department)
+6. Admin (depends on Employee)
+7. DepartmentLocation (depends on Department)
 ```
 
 ---
@@ -865,23 +906,24 @@ The INSERT statements must be executed in this order to avoid FK constraint viol
 
 ```
 1. Users (Omar)
-2. Medication (Youssef)
-3. Employee (Ziad)
-4. Department (Ziad)
-5. Doctor (Ziad)
-6. Nurse (Ziad)
-7. Admin (Ziad)
-8. DepartmentLocation (Ziad)
-9. Patient (Omar)
-10. Bed (Omar)
-11. Triage (Youssef)
-12. EmergencyVisit (Omar)
-13. Appointment (Omar)
-14. Payment (Omar)
-15. Examination (Youssef)
-16. Prescription (Youssef)
-17. PrescriptionDetail (Youssef)
-18. Document (Youssef)
+2. Hospital (Ziad)
+3. Medication (Youssef)
+4. Employee (Ziad)
+5. Department (Ziad)
+6. Doctor (Ziad)
+7. Nurse (Ziad)
+8. Admin (Ziad)
+9. DepartmentLocation (Ziad)
+10. Patient (Omar)
+11. Bed (Omar)
+12. Triage (Youssef)
+13. EmergencyVisit (Omar)
+14. Appointment (Omar)
+15. Payment (Omar)
+16. Examination (Youssef)
+17. Prescription (Youssef)
+18. PrescriptionDetail (Youssef)
+19. Document (Youssef)
 ```
 
 ### Why This Order?
