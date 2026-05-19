@@ -402,6 +402,7 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 | `SSN` | VARCHAR(20) | **UNIQUE, NOT NULL** | 🔴 PDF unique attribute |
 | `HireDate` | DATE | — | When hired |
 | `JobTitle` | VARCHAR(100) | — | e.g., "ER Physician", "Charge Nurse" |
+| `EmployeeType` | ENUM('Doctor','Nurse','Admin') | **NOT NULL** | Discriminator [Lab 2] 🔵 |
 
 **Relationships Mapped:**
 | Relationship | Mapping | Where FK Lives |
@@ -655,14 +656,14 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 
 ---
 
-### Table 1 of 6: Triage (Weak Entity)
+### Table 1 of 7: Triage (Weak Entity) — Lab 3 Compliant
 
 **ERD Entity → Relational Table**
 
 | Column Name | Data Type | Constraints | Notes |
 |-------------|-----------|-------------|-------|
-| `TriageID` | INT | **PRIMARY KEY, AUTO_INCREMENT** | Surrogate key |
-| `PatientID` | INT | **FOREIGN KEY → Patient(PatientID), NOT NULL** | Which patient |
+| `PatientID` | INT | **FOREIGN KEY → Patient(PatientID), PART OF COMPOSITE PK, NOT NULL** | Owner entity FK (Lab 3 weak entity rule) |
+| `TriageID` | INT | **PART OF COMPOSITE PK, NOT NULL** | Partial key |
 | `NurseID` | INT | **FOREIGN KEY → Nurse(NurseID), NOT NULL** | Who performed triage |
 | `DateTime` | DATETIME | **NOT NULL** | When triage occurred |
 | `ChiefComplaint` | TEXT | — | e.g., "Chest pain" |
@@ -671,10 +672,12 @@ Produce a complete markdown file (`schemas/relational-schema.md`) that lists **a
 | `HeartRate` | INT | — | Measured at triage |
 | `Temperature` | DECIMAL(4,1) | — | Measured at triage |
 
+**Primary Key:** `PRIMARY KEY (PatientID, TriageID)` — Composite PK per Lab 3 weak entity mapping rules.
+
 **Relationships Mapped:**
 | Relationship | Mapping | Where FK Lives |
 |-------------|---------|----------------|
-| N:1 with Patient | FK here | `Triage.PatientID` → `Patient.PatientID` |
+| N:1 with Patient | FK here (part of PK) | `Triage.PatientID` → `Patient.PatientID` |
 | N:1 with Nurse | FK here | `Triage.NurseID` → `Nurse.NurseID` |
 | 1:1 with EmergencyVisit | FK in EmergencyVisit | `EmergencyVisit.TriageID` → `Triage.TriageID` (UNIQUE) |
 
@@ -960,9 +963,9 @@ This section shows how all relationships between the 19 tables are implemented v
 
 ---
 
-## Normalization Checklist (3NF)
+## Normalization Checklist (1NF, 2NF, 3NF, BCNF) — Lab 8 Compliant
 
-Each member must verify their tables pass 3NF. Here's the checklist:
+Each member must verify their tables pass all normal forms up to BCNF.
 
 ### 1NF (First Normal Form)
 - [ ] All columns contain **atomic** (indivisible) values
@@ -972,36 +975,41 @@ Each member must verify their tables pass 3NF. Here's the checklist:
 ### 2NF (Second Normal Form)
 - [ ] Already in 1NF
 - [ ] No **partial dependencies** — all non-key columns depend on the **entire** PK
-- [ ] Since all our tables use single-column surrogate PKs, 2NF is automatically satisfied
+- [ ] Most tables use single-column surrogate PKs, so 2NF is automatically satisfied
+- [ ] ⚠️ **Triage** uses composite PK `(PatientID, TriageID)` — verify all non-key attributes depend on BOTH parts (they do, since TriageID is unique per patient visit)
 
 ### 3NF (Third Normal Form)
 - [ ] Already in 2NF
 - [ ] No **transitive dependencies** — non-key columns don't depend on other non-key columns
-- [ ] Example violation (NOT in our design): If we had `DepartmentName` in Doctor table, that would be transitive (Doctor → DepartmentID → DepartmentName). We avoid this by putting DepartmentName only in Department table.
+
+### BCNF (Boyce-Codd Normal Form) — Lab 8
+- [ ] Already in 3NF
+- [ ] For every non-trivial FD `X → A`, `X` must be a **superkey**
+- [ ] All our tables satisfy BCNF because every determinant is a candidate key
 
 ### Verification Table
 
-| Table | 1NF | 2NF | 3NF | Notes |
-|-------|-----|-----|-----|-------|
-| Hospital | ✅ | ✅ | ✅ | Root entity, clean |
-| Users | ✅ | ✅ | ✅ | Clean |
-| Patient | ✅ | ✅ | ✅ | Vitals are current snapshot; historical in Triage |
-| Employee | ✅ | ✅ | ✅ | Superclass — clean |
-| Doctor | ✅ | ✅ | ✅ | ISA pattern |
-| Nurse | ✅ | ✅ | ✅ | ISA pattern |
-| Admin | ✅ | ✅ | ✅ | ISA pattern |
-| Department | ✅ | ✅ | ✅ | Circular FK handled via ALTER TABLE |
-| DepartmentLocation | ✅ | ✅ | ✅ | Clean |
-| Bed | ✅ | ✅ | ✅ | Clean |
-| Triage | ✅ | ✅ | ✅ | Weak entity with surrogate PK |
-| EmergencyVisit | ✅ | ✅ | ✅ | Clean |
-| Examination | ✅ | ✅ | ✅ | Associative entity |
-| Prescription | ✅ | ✅ | ✅ | Header table |
-| PrescriptionDetail | ✅ | ✅ | ✅ | Detail table |
-| Medication | ✅ | ✅ | ✅ | Lookup table |
-| Appointment | ✅ | ✅ | ✅ | Clean |
-| Payment | ✅ | ✅ | ✅ | 1:1 via UNIQUE FK |
-| Document | ✅ | ✅ | ✅ | Nullable VisitID |
+| Table | 1NF | 2NF | 3NF | BCNF | Notes |
+|-------|-----|-----|-----|------|-------|
+| Hospital | ✅ | ✅ | ✅ | ✅ | Root entity, clean |
+| Users | ✅ | ✅ | ✅ | ✅ | Clean |
+| Patient | ✅ | ✅ | ✅ | ✅ | Vitals are current snapshot; historical in Triage |
+| Employee | ✅ | ✅ | ✅ | ✅ | Superclass with discriminator |
+| Doctor | ✅ | ✅ | ✅ | ✅ | ISA pattern |
+| Nurse | ✅ | ✅ | ✅ | ✅ | ISA pattern |
+| Admin | ✅ | ✅ | ✅ | ✅ | ISA pattern |
+| Department | ✅ | ✅ | ✅ | ✅ | Circular FK handled via ALTER TABLE |
+| DepartmentLocation | ✅ | ✅ | ✅ | ✅ | Clean |
+| Bed | ✅ | ✅ | ✅ | ✅ | Clean |
+| Triage | ✅ | ✅ | ✅ | ✅ | Weak entity with composite PK `(PatientID, TriageID)` |
+| EmergencyVisit | ✅ | ✅ | ✅ | ✅ | Clean |
+| Examination | ✅ | ✅ | ✅ | ✅ | Associative entity |
+| Prescription | ✅ | ✅ | ✅ | ✅ | Header table |
+| PrescriptionDetail | ✅ | ✅ | ✅ | ✅ | Detail table |
+| Medication | ✅ | ✅ | ✅ | ✅ | Lookup table |
+| Appointment | ✅ | ✅ | ✅ | ✅ | Clean |
+| Payment | ✅ | ✅ | ✅ | ✅ | 1:1 via UNIQUE FK |
+| Document | ✅ | ✅ | ✅ | ✅ | Nullable VisitID |
 
 ---
 

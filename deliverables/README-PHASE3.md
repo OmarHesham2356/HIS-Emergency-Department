@@ -60,6 +60,11 @@ schemas/his-emergency.sql
 -- Team: Omar Hesham, Ziad Khaled, Youssef Amir
 -- ============================================
 
+-- 0. DATABASE SETUP (Lab 4)
+DROP DATABASE IF EXISTS his_emergency;
+CREATE DATABASE his_emergency;
+USE his_emergency;
+
 -- 1. DROP TABLES (if exist) — in reverse dependency order
 -- 2. CREATE TABLES — in dependency order (no FK references before table exists)
 -- 3. ADD FOREIGN KEYS — for circular dependencies
@@ -196,9 +201,9 @@ CREATE TABLE EmergencyVisit (
     Disposition ENUM('Admitted', 'Discharged', 'Transferred', 'Left Without Being Seen'),
     PRIMARY KEY (VisitID),
     UNIQUE KEY uk_ev_triageid (TriageID),
-    CONSTRAINT fk_ev_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    CONSTRAINT fk_ev_triage FOREIGN KEY (TriageID) REFERENCES Triage(TriageID),
-    CONSTRAINT fk_ev_bed FOREIGN KEY (BedID) REFERENCES Bed(BedID)
+    CONSTRAINT fk_ev_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+    CONSTRAINT fk_ev_triage FOREIGN KEY (TriageID) REFERENCES Triage(TriageID) ON DELETE CASCADE,
+    CONSTRAINT fk_ev_bed FOREIGN KEY (BedID) REFERENCES Bed(BedID) ON DELETE SET NULL
 );
 ```
 
@@ -412,6 +417,7 @@ CREATE TABLE Employee (
     SSN VARCHAR(20) NOT NULL,
     HireDate DATE,
     JobTitle VARCHAR(100),
+    EmployeeType ENUM('Doctor', 'Nurse', 'Admin') NOT NULL,
     PRIMARY KEY (EmployeeID),
     UNIQUE KEY uk_employee_userid (UserID),
     UNIQUE KEY uk_employee_ssn (SSN),
@@ -421,12 +427,12 @@ CREATE TABLE Employee (
 
 **Sample INSERT Data (5 rows):**
 ```sql
-INSERT INTO Employee (UserID, FirstName, LastName, BirthDate, Sex, SSN, HireDate, JobTitle) VALUES
-(2, 'Ziad', 'Khaled', '1985-04-12', 'M', '222-33-4444', '2020-01-15', 'ER Physician'),
-(3, 'Youssef', 'Amir', '1990-08-20', 'M', '333-44-5555', '2021-06-01', 'Charge Nurse'),
-(4, 'Admin', 'User', '1980-01-01', 'M', '444-55-6666', '2019-03-10', 'System Administrator'),
-(9, 'Fatma', 'Nabil', '1988-12-15', 'F', '555-66-7777', '2022-02-20', 'ER Nurse'),
-(10, 'Tarek', 'Samir', '1975-09-05', 'M', '666-77-8888', '2018-11-01', 'Senior Physician');
+INSERT INTO Employee (UserID, FirstName, LastName, BirthDate, Sex, SSN, HireDate, JobTitle, EmployeeType) VALUES
+(2, 'Ziad', 'Khaled', '1985-04-12', 'M', '222-33-4444', '2020-01-15', 'ER Physician', 'Doctor'),
+(3, 'Youssef', 'Amir', '1990-08-20', 'M', '333-44-5555', '2021-06-01', 'Charge Nurse', 'Nurse'),
+(4, 'Admin', 'User', '1980-01-01', 'M', '444-55-6666', '2019-03-10', 'System Administrator', 'Admin'),
+(9, 'Fatma', 'Nabil', '1988-12-15', 'F', '555-66-7777', '2022-02-20', 'ER Nurse', 'Nurse'),
+(10, 'Tarek', 'Samir', '1975-09-05', 'M', '666-77-8888', '2018-11-01', 'Senior Physician', 'Doctor');
 ```
 
 **What to add to `his-emergency.sql`:**
@@ -651,8 +657,8 @@ INSERT INTO DepartmentLocation (DepartmentID, Address, Latitude, Longitude) VALU
 **Full SQL:**
 ```sql
 CREATE TABLE Triage (
-    TriageID INT AUTO_INCREMENT,
     PatientID INT NOT NULL,
+    TriageID INT NOT NULL,
     NurseID INT NOT NULL,
     DateTime DATETIME NOT NULL,
     ChiefComplaint TEXT,
@@ -660,21 +666,21 @@ CREATE TABLE Triage (
     BloodPressure VARCHAR(10),
     HeartRate INT,
     Temperature DECIMAL(4,1),
-    PRIMARY KEY (TriageID),
+    PRIMARY KEY (PatientID, TriageID),
     CONSTRAINT chk_triage_level CHECK (TriageLevel BETWEEN 1 AND 5),
-    CONSTRAINT fk_triage_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    CONSTRAINT fk_triage_nurse FOREIGN KEY (NurseID) REFERENCES Nurse(NurseID)
+    CONSTRAINT fk_triage_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+    CONSTRAINT fk_triage_nurse FOREIGN KEY (NurseID) REFERENCES Nurse(NurseID) ON DELETE RESTRICT
 );
 ```
 
 **Sample INSERT Data (5 rows):**
 ```sql
-INSERT INTO Triage (PatientID, NurseID, DateTime, ChiefComplaint, TriageLevel, BloodPressure, HeartRate, Temperature) VALUES
-(1, 1, '2026-05-18 08:00:00', 'Chest pain', 2, '140/90', 95, 37.8),
-(2, 2, '2026-05-18 09:15:00', 'Shortness of breath', 3, '150/95', 88, 37.2),
-(3, 1, '2026-05-18 10:30:00', 'Minor laceration', 4, '125/80', 70, 36.8),
-(4, 2, '2026-05-18 11:45:00', 'Abdominal pain', 2, '135/85', 82, 37.5),
-(5, 1, '2026-05-18 13:00:00', 'Headache', 5, '110/70', 65, 36.5);
+INSERT INTO Triage (PatientID, TriageID, NurseID, DateTime, ChiefComplaint, TriageLevel, BloodPressure, HeartRate, Temperature) VALUES
+(1, 1, 1, '2026-05-18 08:00:00', 'Chest pain', 2, '140/90', 95, 37.8),
+(2, 2, 2, '2026-05-18 09:15:00', 'Shortness of breath', 3, '150/95', 88, 37.2),
+(3, 3, 1, '2026-05-18 10:30:00', 'Minor laceration', 4, '125/80', 70, 36.8),
+(4, 4, 2, '2026-05-18 11:45:00', 'Abdominal pain', 2, '135/85', 82, 37.5),
+(5, 5, 1, '2026-05-18 13:00:00', 'Headache', 5, '110/70', 65, 36.5);
 ```
 
 **What to add to `his-emergency.sql`:**
@@ -702,9 +708,9 @@ CREATE TABLE Examination (
     ExaminationDate DATETIME NOT NULL,
     HoursSpent DECIMAL(4,2),
     PRIMARY KEY (ExaminationID),
-    CONSTRAINT fk_exam_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID),
-    CONSTRAINT fk_exam_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    CONSTRAINT fk_exam_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID)
+    CONSTRAINT fk_exam_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE CASCADE,
+    CONSTRAINT fk_exam_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+    CONSTRAINT fk_exam_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID) ON DELETE CASCADE
 );
 ```
 
@@ -742,9 +748,9 @@ CREATE TABLE Prescription (
     VisitID INT NOT NULL,
     PrescriptionDate DATE NOT NULL,
     PRIMARY KEY (PrescriptionID),
-    CONSTRAINT fk_rx_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID),
-    CONSTRAINT fk_rx_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    CONSTRAINT fk_rx_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID)
+    CONSTRAINT fk_rx_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE CASCADE,
+    CONSTRAINT fk_rx_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+    CONSTRAINT fk_rx_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID) ON DELETE CASCADE
 );
 ```
 
@@ -785,8 +791,8 @@ CREATE TABLE PrescriptionDetail (
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
     PRIMARY KEY (PrescriptionDetailID),
-    CONSTRAINT fk_rxd_rx FOREIGN KEY (PrescriptionID) REFERENCES Prescription(PrescriptionID),
-    CONSTRAINT fk_rxd_med FOREIGN KEY (MedicationID) REFERENCES Medication(MedicationID)
+    CONSTRAINT fk_rxd_rx FOREIGN KEY (PrescriptionID) REFERENCES Prescription(PrescriptionID) ON DELETE CASCADE,
+    CONSTRAINT fk_rxd_med FOREIGN KEY (MedicationID) REFERENCES Medication(MedicationID) ON DELETE RESTRICT
 );
 ```
 
@@ -861,8 +867,8 @@ CREATE TABLE Document (
     UploadDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     Description TEXT,
     PRIMARY KEY (DocumentID),
-    CONSTRAINT fk_doc_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
-    CONSTRAINT fk_doc_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID)
+    CONSTRAINT fk_doc_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+    CONSTRAINT fk_doc_visit FOREIGN KEY (VisitID) REFERENCES EmergencyVisit(VisitID) ON DELETE SET NULL
 );
 ```
 

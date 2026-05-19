@@ -49,21 +49,26 @@ Each member must design **6 entities** in an ERD tool (**draw.io** or **Lucidcha
 
 ---
 
-## ERD Notation Reference (Cheat Sheet)
+## ERD Notation Reference (Cheat Sheet) — Lab 1 & 2 Compliant
 
 Keep this open while drawing:
 
-| Symbol | Meaning | Example |
-|--------|---------|---------|
-| `▭ Rectangle` | Entity (a table) | `▭ Patient` |
-| `▭▭ Double Rectangle` | Weak Entity (depends on another) | `▭▭ Triage` |
-| `◊ Diamond` | Relationship | `◊ Examines` |
-| `<u>underline</u>` | Primary Key | `<u>PatientID</u>` |
-| **`<u>bold+underline</u>`** | **Unique** (bold in PDF) | **`<u>SSN</u>`** |
-| `(FK)` | Foreign Key | `DepartmentID (FK)` |
-| `1`, `N`, `M` on lines | Cardinality | `Patient —1—N— EmergencyVisit` |
-| `[A, B, C]` | ENUM values | `Status [Available, Occupied]` |
-| `(min, max)` | Min/Max participation | `(1,1)` or `(0,N)` |
+| Symbol | Meaning | Lab Reference |
+|--------|---------|---------------|
+| `▭ Rectangle` | Strong Entity | Lab 1 |
+| `▭▭ Double Rectangle` | Weak Entity | Lab 1 |
+| `◊ Diamond` | Relationship | Lab 1 |
+| `◊◊ Double Diamond` | Identifying Relationship (for weak entity) | Lab 1 |
+| `○ Ellipse` | Attribute | Lab 1 |
+| `○= Double Ellipse` | Multivalued Attribute | Lab 1 |
+| `--- Dashed Ellipse` | Derived Attribute | Lab 1 |
+| `<u>underline</u>` | Primary Key | Lab 1 |
+| `(min, max)` | Participation & Cardinality | Lab 1 |
+| `═══ Double line` | Total Participation (mandatory) | Lab 1 |
+| `─── Single line` | Partial Participation (optional) | Lab 1 |
+| `△ ISA` with `d` | Disjoint Specialization | Lab 2 |
+| `△ ISA` with `o` | Overlap Specialization | Lab 2 |
+| `═══` to ISA triangle | Total Specialization | Lab 2 |
 
 ---
 
@@ -369,6 +374,7 @@ Day 2 (Tue):  Payment (once Appointment is done)
 | SSN | VARCHAR(20) | **UNIQUE, NOT NULL** | **<u>SSN</u>** 🔴 |
 | HireDate | DATE | — | HireDate |
 | JobTitle | VARCHAR(100) | — | JobTitle |
+| EmployeeType | ENUM('Doctor','Nurse','Admin') | **NOT NULL** | Discriminator [Lab 2] 🔵 |
 
 🔴 **SSN must be bold+underlined** — it's one of the unique attributes from the PDF specification.
 
@@ -381,19 +387,24 @@ Day 2 (Tue):  Payment (once Appointment is done)
 | Is a (specialization) | Nurse | 1:1 | Same as above — Employee `1` → ISA → Nurse `1`. |
 | Is a (specialization) | Admin | 1:1 | Same as above — Employee `1` → ISA → Admin `1`. |
 
-**How to draw the ISA hierarchy (specialization):**
+**How to draw the ISA hierarchy (specialization) — Lab 2 Compliant:**
 ```
          ┌──────────┐
          │ Employee │  ← superclass
          └────▲─────┘
-              │
-            ◁ISA▷      ← triangle
+              ║              ← DOUBLE LINE = Total Specialization
+              │              (Every employee MUST be Doctor, Nurse, or Admin)
+            ◁ISA▷ [d]        ← [d] = Disjoint (cannot be more than one)
          ┌────┴─────┐
          │          │
     ┌────┴───┐ ┌───┴────┐ ┌────┴───┐
     │ Doctor │ │ Nurse  │ │ Admin  │   ← subclasses
     └────────┘ └────────┘ └────────┘
 ```
+**Lab 2 Compliance Notes:**
+- **Total Specialization**: Double line from Employee to ISA triangle (every employee record must belong to at least one subtype).
+- **Disjoint (`d`)**: An employee cannot be both a Doctor and a Nurse simultaneously.
+- **Discriminator**: Add `EmployeeType` attribute to Employee with values `['Doctor', 'Nurse', 'Admin']`. This determines which subtype table the record goes into.
 
 **📌 Dependencies:**
 - Needs **UserID** from **Omar** (Users).
@@ -598,14 +609,16 @@ Day 2 (Tue):  Give NurseID to Youssef (for Triage)
 
 **What it represents:** The **initial assessment** performed on a patient when they arrive at the Emergency Department. A triage is done by a nurse and assigns a severity level (1-5). Each triage results in exactly one emergency visit.
 
-**Why is Triage a Weak Entity?** A triage record cannot exist without a Patient and a Nurse (it depends on both). However, we give it its own TriageID as PK — think of it as a **weak entity with a synthetic key**. In the ERD, mark it with a **double border** to show it depends on Patient and Nurse.
+**Why is Triage a Weak Entity?** A triage record cannot exist without a Patient and a Nurse (it depends on both). In the ERD, mark it with a **double border** to show it depends on Patient and Nurse. The relationship to Patient/Nurse uses a **double diamond** (identifying relationship) per Lab 1.
+
+**Lab 3 Compliance:** Per Lab 3 weak entity mapping rules, the PK should be composite: `(PatientID, TriageID)` or `(PatientID, DateTime)`. We will use `(PatientID, TriageID)` as the composite primary key.
 
 **Attributes:**
 
 | Attribute | Data Type | Constraints | ERD Notation |
 |-----------|-----------|-------------|--------------|
-| TriageID | INT | **PRIMARY KEY** | <u>TriageID</u> |
-| PatientID | INT | **FOREIGN KEY → Patient(PatientID), NOT NULL** | PatientID (FK) → Patient |
+| PatientID | INT | **FOREIGN KEY → Patient(PatientID), PART OF PK, NOT NULL** | <u>PatientID</u> (FK) → Patient |
+| TriageID | INT | **PART OF PK, NOT NULL** | <u>TriageID</u> |
 | NurseID | INT | **FOREIGN KEY → Nurse(NurseID), NOT NULL** | NurseID (FK) → Nurse |
 | DateTime | DATETIME | **NOT NULL** | DateTime |
 | ChiefComplaint | TEXT | — (e.g., "Chest pain", "Difficulty breathing") | ChiefComplaint |
