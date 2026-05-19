@@ -1,0 +1,256 @@
+<diagram name="Member 2 Relational">
+<mxGraphModel dx="1800" dy="1200" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1800" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="HOSPITAL_lbl" value="HOSPITAL" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="30" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_hospital" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="60" width="720" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_id" value="&lt;u&gt;HospitalID&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_name" value="&lt;b&gt;Name&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_address" value="Address" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_phone" value="&lt;b&gt;Phone&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_email" value="&lt;b&gt;Email&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="560" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="hosp_year" value="EstablishedYear" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="680" y="60" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="EMPLOYEE_lbl" value="EMPLOYEE" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="140" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_employee" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="170" width="1080" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_id" value="employeeId" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_userid" value="userId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_fname" value="firstName" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_lname" value="lastName" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_bdate" value="birthDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="560" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_sex" value="sex" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="680" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_ssn" value="&lt;b&gt;ssn&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="800" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_hire" value="hireDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="920" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="emp_job" value="jobTitle" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="1040" y="170" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="DEPARTMENT_lbl" value="DEPARTMENT" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="250" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_department" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="280" width="600" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="dept_id" value="departmentId" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="280" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="dept_name" value="&lt;b&gt;Name&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="280" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="dept_code" value="&lt;b&gt;Code&lt;/b&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="280" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="dept_super" value="supervisionStartDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="280" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="dept_chair" value="chairmanDoctorId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="560" y="280" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="DEPARTMENT_LOCATION_lbl" value="DEPARTMENT_LOCATION" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="360" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_department_location" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="390" width="600" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="loc_id" value="&lt;u&gt;locationId&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="390" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="loc_dept" value="departmentId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="390" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="loc_addr" value="address" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="390" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="loc_lat" value="latitude" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="390" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="loc_lon" value="longitude" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="560" y="390" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="DOCTOR_lbl" value="DOCTOR" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="470" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_doctor" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="500" width="720" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_id" value="doctorId" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_emp" value="employeeId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_dept" value="departmentId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_area" value="majorScientificArea" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_deg" value="Degree" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="560" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="doc_join" value="joinDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="680" y="500" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="NURSE_lbl" value="NURSE" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="580" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_nurse" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="610" width="480" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="nurse_id" value="nurseId" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="610" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="nurse_emp" value="employeeId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="610" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="nurse_dept" value="departmentId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="320" y="610" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="nurse_join" value="joinDate" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="440" y="610" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ADMIN_lbl" value="ADMIN" style="text;html=1;fontStyle=1;fontSize=13;align=left;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="690" width="200" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="rect_admin" value="" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#cccccc;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+      <mxGeometry x="80" y="720" width="240" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="admin_id" value="&lt;u&gt;adminId&lt;/u&gt;" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="80" y="720" width="120" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="admin_emp" value="employeeId (FK)" style="shape=mxgraph.lean_mapping.electronic_info_flow_edge;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;fillColor=none;strokeColor=#cccccc;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="200" y="720" width="120" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="edge_emp_user" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" source="emp_userid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="260" y="110" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="260" y="150" />
+          <mxPoint x="260" y="110" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge_emp_user_lbl" value="→ USERS (Member 1)" style="text;html=1;fontSize=10;fontStyle=2;strokeColor=none;fillColor=none;fontColor=default;" vertex="1" parent="1">
+      <mxGeometry x="260" y="100" width="10" height="10" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="edge_loc_dept" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="loc_dept" target="dept_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="260" y="360" />
+          <mxPoint x="140" y="360" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_doc_emp" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="doc_emp" target="emp_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="260" y="480" />
+          <mxPoint x="40" y="480" />
+          <mxPoint x="40" y="220" />
+          <mxPoint x="140" y="220" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_doc_dept" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="doc_dept" target="dept_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="380" y="470" />
+          <mxPoint x="60" y="470" />
+          <mxPoint x="60" y="330" />
+          <mxPoint x="140" y="330" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_nurse_emp" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="nurse_emp" target="emp_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="260" y="590" />
+          <mxPoint x="30" y="590" />
+          <mxPoint x="30" y="225" />
+          <mxPoint x="140" y="225" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_nurse_dept" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="nurse_dept" target="dept_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="380" y="580" />
+          <mxPoint x="70" y="580" />
+          <mxPoint x="70" y="335" />
+          <mxPoint x="140" y="335" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_admin_emp" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="admin_emp" target="emp_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="260" y="700" />
+          <mxPoint x="20" y="700" />
+          <mxPoint x="20" y="230" />
+          <mxPoint x="140" y="230" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="edge_dept_chair_doc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;startArrow=none;strokeColor=default;strokeWidth=1.5;dashed=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="dept_chair" target="doc_id" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="560" y="340" />
+          <mxPoint x="770" y="340" />
+          <mxPoint x="770" y="515" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+</diagram>
