@@ -1,132 +1,155 @@
 -- ============================================================
--- MEMBER 2 — ZIAD KHALED
--- Focus: Staff Hierarchy & Location Tables
+-- Member 2 — Ziad Khaled
+-- Focus: Staff Hierarchy & Locations
+-- Tables: Hospital, Employee, Department, Doctor, Nurse, Admin,
+--         DepartmentLocation
+-- Lab 4 DDL Syntax — MySQL
 -- ============================================================
 
--- ============================================================
--- 1. DROP TABLES (Safe Cyclic Cleanup)
--- ============================================================
--- Disabling checks prevents MySQL from blocking the drop of Department/Doctor
-SET FOREIGN_KEY_CHECKS = 0;
-
-DROP TABLE IF EXISTS DepartmentLocation;
-DROP TABLE IF EXISTS Admin;
-DROP TABLE IF EXISTS Nurse;
-DROP TABLE IF EXISTS Doctor;
-DROP TABLE IF EXISTS Department;
-DROP TABLE IF EXISTS Employee;
-DROP TABLE IF EXISTS Hospital;
-
-SET FOREIGN_KEY_CHECKS = 1;
+CREATE DATABASE IF NOT EXISTS emergency_dept;
+USE emergency_dept;
 
 -- ============================================================
--- 2. CREATE TABLES (Exact Match to Specification)
+-- 1. HOSPITAL
+-- Strong entity. Root of the location hierarchy.
 -- ============================================================
-
--- Table 1 of 7: Hospital
 CREATE TABLE Hospital (
-    HospitalID INT AUTO_INCREMENT,
-    Name VARCHAR(100) NOT NULL,
-    Address TEXT,
-    Phone VARCHAR(20),
-    Email VARCHAR(100),
+    HospitalID      INT AUTO_INCREMENT,
+    Name            VARCHAR(100)    NOT NULL,
+    Address         TEXT,
+    Phone           VARCHAR(20),
+    Email           VARCHAR(100),
     EstablishedYear INT,
     PRIMARY KEY (HospitalID),
-    UNIQUE KEY uk_hospital_name (Name),
-    UNIQUE KEY uk_hospital_email (Email)
-);
-
--- Table 2 of 7: Employee (Superclass)
-CREATE TABLE Employee (
-    EmployeeID INT AUTO_INCREMENT,
-    UserID INT NOT NULL, -- FK to Omar's Users table
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    BirthDate DATE,
-    Sex ENUM('M', 'F') NOT NULL,
-    SSN VARCHAR(20) NOT NULL,
-    HireDate DATE,
-    JobTitle VARCHAR(100),
-    EmployeeType ENUM('Doctor', 'Nurse', 'Admin') NOT NULL,
-    PRIMARY KEY (EmployeeID),
-    UNIQUE KEY uk_employee_userid (UserID),
-    UNIQUE KEY uk_employee_ssn (SSN),
-    CONSTRAINT fk_employee_user FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
-
--- Table 3 of 7: Department (Created without circular constraint first)
-CREATE TABLE Department (
-    DepartmentID INT AUTO_INCREMENT,
-    HospitalID INT NOT NULL,
-    Name VARCHAR(100) NOT NULL,
-    Code VARCHAR(20) NOT NULL,
-    ChairmanDoctorID INT, -- Will apply FK below
-    SupervisionStartDate DATE,
-    PRIMARY KEY (DepartmentID),
-    UNIQUE KEY uk_dept_name (Name),
-    UNIQUE KEY uk_dept_code (Code),
-    CONSTRAINT fk_dept_hospital FOREIGN KEY (HospitalID) REFERENCES Hospital(HospitalID)
-);
-
--- Table 4 of 7: Doctor (Subclass)
-CREATE TABLE Doctor (
-    DoctorID INT AUTO_INCREMENT,
-    EmployeeID INT NOT NULL,
-    DepartmentID INT NOT NULL,
-    MajorScientificArea VARCHAR(100),
-    Degree VARCHAR(50),
-    JoinDate DATE,
-    PRIMARY KEY (DoctorID),
-    UNIQUE KEY uk_doctor_empid (EmployeeID),
-    CONSTRAINT fk_doctor_employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    CONSTRAINT fk_doctor_dept FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
-);
-
--- Circular Dependency Fix: Apply the constraint now that Doctor exists
-ALTER TABLE Department
-    ADD CONSTRAINT fk_dept_chairman FOREIGN KEY (ChairmanDoctorID) REFERENCES Doctor(DoctorID);
-
--- Table 5 of 7: Nurse (Subclass)
-CREATE TABLE Nurse (
-    NurseID INT AUTO_INCREMENT,
-    EmployeeID INT NOT NULL,
-    DepartmentID INT NOT NULL,
-    JoinDate DATE,
-    PRIMARY KEY (NurseID),
-    UNIQUE KEY uk_nurse_empid (EmployeeID),
-    CONSTRAINT fk_nurse_employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    CONSTRAINT fk_nurse_dept FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
-);
-
--- Table 6 of 7: Admin (Subclass)
-CREATE TABLE Admin (
-    AdminID INT AUTO_INCREMENT,
-    EmployeeID INT NOT NULL,
-    PRIMARY KEY (AdminID),
-    UNIQUE KEY uk_admin_empid (EmployeeID),
-    CONSTRAINT fk_admin_employee FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
-);
-
--- Table 7 of 7: DepartmentLocation
-CREATE TABLE DepartmentLocation (
-    LocationID INT AUTO_INCREMENT,
-    DepartmentID INT NOT NULL,
-    Address TEXT,
-    Latitude DECIMAL(10,8),
-    Longitude DECIMAL(11,8),
-    PRIMARY KEY (LocationID),
-    CONSTRAINT fk_deptloc_dept FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+    UNIQUE (Name),
+    UNIQUE (Email)
 );
 
 -- ============================================================
--- 3. INSERT SAMPLE DATA
+-- 2. EMPLOYEE
+-- Superclass in the ISA hierarchy (Doctor / Nurse / Admin).
+-- UserID FK → Users (Omar — cross-team, added in ALTER below).
+-- ============================================================
+CREATE TABLE Employee (
+    EmployeeID      INT AUTO_INCREMENT,
+    UserID          INT             NOT NULL,
+    FirstName       VARCHAR(50)     NOT NULL,
+    LastName        VARCHAR(50)     NOT NULL,
+    BirthDate       DATE,
+    Sex             ENUM('M','F')   NOT NULL,
+    SSN             VARCHAR(20)     NOT NULL,
+    HireDate        DATE,
+    JobTitle        VARCHAR(100),
+    EmployeeType    ENUM('Doctor','Nurse','Admin') NOT NULL,
+    PRIMARY KEY (EmployeeID),
+    UNIQUE (UserID),
+    UNIQUE (SSN)
+    -- CONSTRAINT fk_employee_user FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    --   (cross-team — enabled in merged schema)
+);
+
+-- ============================================================
+-- 3. DEPARTMENT
+-- Belongs to one Hospital. ChairmanDoctorID is circular
+-- (references Doctor) and is added via ALTER below.
+-- ============================================================
+CREATE TABLE Department (
+    DepartmentID        INT AUTO_INCREMENT,
+    HospitalID          INT             NOT NULL,
+    Name                VARCHAR(100)    NOT NULL,
+    Code                VARCHAR(20)     NOT NULL,
+    ChairmanDoctorID    INT,
+    SupervisionStartDate DATE,
+    PRIMARY KEY (DepartmentID),
+    UNIQUE (Name),
+    UNIQUE (Code),
+    FOREIGN KEY (HospitalID) REFERENCES Hospital(HospitalID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 4. DOCTOR
+-- Subclass of Employee. Belongs to one Department.
+-- ============================================================
+CREATE TABLE Doctor (
+    EmployeeID          INT             NOT NULL,
+    DepartmentID        INT             NOT NULL,
+    MajorScientificArea VARCHAR(100),
+    Degree              VARCHAR(50),
+    JoinDate            DATE,
+    PRIMARY KEY (EmployeeID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- Circular Dependency Fix: Department.ChairmanDoctorID → Doctor
+-- ============================================================
+ALTER TABLE Department
+    ADD CONSTRAINT fk_dept_chairman
+    FOREIGN KEY (ChairmanDoctorID) REFERENCES Doctor(EmployeeID)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE;
+
+-- ============================================================
+-- 5. NURSE
+-- Subclass of Employee. Belongs to one Department.
+-- ============================================================
+CREATE TABLE Nurse (
+    EmployeeID      INT             NOT NULL,
+    DepartmentID    INT             NOT NULL,
+    JoinDate        DATE,
+    PRIMARY KEY (EmployeeID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 6. ADMIN
+-- Subclass of Employee.
+-- ============================================================
+CREATE TABLE Admin (
+    EmployeeID      INT             NOT NULL,
+    PRIMARY KEY (EmployeeID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 7. DEPARTMENT_LOCATION
+-- A Department may have multiple physical locations.
+-- ============================================================
+CREATE TABLE DepartmentLocation (
+    LocationID      INT AUTO_INCREMENT,
+    DepartmentID    INT             NOT NULL,
+    Address         TEXT,
+    Latitude        DECIMAL(10,8),
+    Longitude       DECIMAL(11,8),
+    PRIMARY KEY (LocationID),
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- SAMPLE DATA
+-- Requires UserIDs from Omar's Users table to already exist.
 -- ============================================================
 
 INSERT INTO Hospital (Name, Address, Phone, Email, EstablishedYear) VALUES
 ('Cairo General Hospital', '123 Health St, Cairo, Egypt', '02-12345678', 'info@cairogeneral.eg', 1985),
 ('Nile Medical Center', '456 River Rd, Giza, Egypt', '02-87654321', 'contact@nilemed.eg', 2005);
 
--- Requires UserIDs 2, 3, 4, 9, 10, 11, 12 to be seeded by Member 1 first
 INSERT INTO Employee (UserID, FirstName, LastName, BirthDate, Sex, SSN, HireDate, JobTitle, EmployeeType) VALUES
 (2, 'Ziad', 'Khaled', '1985-04-12', 'M', '222-33-4444', '2020-01-15', 'ER Physician', 'Doctor'),
 (3, 'Youssef', 'Amir', '1990-08-20', 'M', '333-44-5555', '2021-06-01', 'Charge Nurse', 'Nurse'),
@@ -145,9 +168,8 @@ INSERT INTO Doctor (EmployeeID, DepartmentID, MajorScientificArea, Degree, JoinD
 (5, 1, 'Trauma Surgery', 'MD, FACS', '2018-11-01'),
 (6, 2, 'Cardiology', 'MD, PhD', '2021-06-01');
 
--- Safe post-population link updates for the chairmen
 UPDATE Department SET ChairmanDoctorID = 1 WHERE DepartmentID = 1;
-UPDATE Department SET ChairmanDoctorID = 3 WHERE DepartmentID = 2;
+UPDATE Department SET ChairmanDoctorID = 6 WHERE DepartmentID = 2;
 
 INSERT INTO Nurse (EmployeeID, DepartmentID, JoinDate) VALUES
 (2, 1, '2021-06-01'),
@@ -159,3 +181,12 @@ INSERT INTO Admin (EmployeeID) VALUES (3);
 INSERT INTO DepartmentLocation (DepartmentID, Address, Latitude, Longitude) VALUES
 (1, '123 Emergency St, Cairo, Egypt', 30.04440000, 31.23570000),
 (2, '456 Cardiology Ave, Cairo, Egypt', 30.06260000, 31.24970000);
+
+-- ============================================================
+-- CROSS-TEAM FOREIGN KEY CONSTRAINTS (deferred)
+-- Employee.UserID → Users(UserID)  [Omar]
+-- ============================================================
+-- ALTER TABLE Employee
+--     ADD FOREIGN KEY (UserID) REFERENCES Users(UserID)
+--         ON DELETE RESTRICT
+--         ON UPDATE CASCADE;

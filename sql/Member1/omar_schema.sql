@@ -166,7 +166,7 @@ CREATE TABLE EmergencyVisit (
 
 -- Appointment → Doctor (Ziad)
 -- ALTER TABLE Appointment
---     ADD FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+--     ADD FOREIGN KEY (DoctorID) REFERENCES Doctor(EmployeeID)
 --         ON DELETE RESTRICT
 --         ON UPDATE CASCADE;
 
