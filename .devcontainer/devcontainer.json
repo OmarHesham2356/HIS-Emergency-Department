@@ -1,0 +1,15 @@
+{
+  "name": "ED HIS Emergency Department",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/HIS-Emergency-Department",
+  "overrideCommand": true,
+  "runArgs": ["--network=host"],
+  "remoteEnv": {
+    "PYTHONPATH": "/workspaces/HIS-Emergency-Department/app",
+    "DB_HOST": "localhost",
+    "MYSQL_HOST": "127.0.0.1"
+  }
+}
